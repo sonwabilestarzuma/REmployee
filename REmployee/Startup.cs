@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using REmployee.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using REmployee.Models;
+using UserIdentityCore.Data;
 
 namespace REmployee
 {
@@ -38,15 +40,30 @@ namespace REmployee
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>(
+                   options => options.Password.RequireNonAlphanumeric = false)
+               .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddDefaultTokenProviders()
+               .AddDefaultUI(UIFramework.Bootstrap4);
+
+          //  services.AddIdentity<IdentityUser, IdentityRole>(options =>
+          //options.Password.RequireNonAlphanumeric = false)
+          //.AddEntityFrameworkStores<ApplicationDbContext>()
+          //.AddDefaultTokenProviders()
+          //.AddDefaultUI(UIFramework.Bootstrap4);
+
+
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, 
+                                RoleManager<ApplicationRole> roleManager,
+                                UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -72,6 +89,9 @@ namespace REmployee
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            DummyData.Initialize(context, userManager, roleManager).Wait();
         }
     }
 }
+
