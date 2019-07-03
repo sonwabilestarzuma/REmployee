@@ -42,7 +42,7 @@ namespace REmployee
                     Configuration.GetConnectionString("DefaultConnection")));
             
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>(
+            services.AddIdentity<IdentityUser, ApplicationRole>(
                    options => options.Password.RequireNonAlphanumeric = false)
                .AddEntityFrameworkStores<ApplicationDbContext>()
                .AddDefaultTokenProviders()
@@ -58,12 +58,19 @@ namespace REmployee
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, 
                                 RoleManager<ApplicationRole> roleManager,
-                                UserManager<ApplicationUser> userManager)
+                                UserManager<Models.ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
