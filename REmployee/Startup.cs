@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using REmployee.Models;
 using UserIdentityCore.Data;
+using REmployee.Areas;
 
 namespace REmployee
 {
@@ -42,7 +43,7 @@ namespace REmployee
                     Configuration.GetConnectionString("DefaultConnection")));
             
 
-            services.AddIdentity<IdentityUser, ApplicationRole>(
+            services.AddIdentity<ApplicationUser, ApplicationRole>(
                    options => options.Password.RequireNonAlphanumeric = false)
                .AddEntityFrameworkStores<ApplicationDbContext>()
                .AddDefaultTokenProviders()
@@ -70,7 +71,7 @@ namespace REmployee
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, 
                                 RoleManager<ApplicationRole> roleManager,
-                                UserManager<Models.ApplicationUser> userManager)
+                                UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -89,7 +90,7 @@ namespace REmployee
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
+            InitialUser.Initialize(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider);
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -97,7 +98,7 @@ namespace REmployee
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(context, userManager, roleManager).Wait();
+           DummyData.Initialize(context, userManager, roleManager).Wait();
         }
     }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace REmployee.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityRole
-    {
+    public class ApplicationUser : IdentityUser
+    { 
         public ApplicationUser() : base()
         { }
 

@@ -12,7 +12,7 @@ namespace UserIdentityCore.Data
     public class DummyData
     {
         public static async Task Initialize(ApplicationDbContext context,
-                             UserManager<REmployee.Models.ApplicationUser> userManager,
+                             UserManager<ApplicationUser> userManager,
                              RoleManager<ApplicationRole> roleManager)
         {
             context.Database.EnsureCreated();
@@ -41,7 +41,7 @@ namespace UserIdentityCore.Data
 
             if (await userManager.FindByNameAsync("aa@aa.com") == null)
             {
-                var user = new REmployee.Models.ApplicationUser
+                var user = new ApplicationUser
                 {
                     UserName = "aa@aa.com",
                     Email = "aa@aa.com",
@@ -58,10 +58,10 @@ namespace UserIdentityCore.Data
                         {
                             Status = "True"
                         },
-                         Title = new Title
-                         {
-                             JobTitle = "Software Developer"
-                         }
+                        Title = new Title
+                        {
+                            JobTitle = "Software Developer"
+                        }
                     },
 
                 };
@@ -78,7 +78,7 @@ namespace UserIdentityCore.Data
             if (await userManager.FindByNameAsync("bb@bb.com") == null)
             {
 
-                var user = new REmployee.Models.ApplicationUser
+                var user = new ApplicationUser
                 {
                     UserName = "bb@bb.com",
                     Email = "bb@bb.com",
@@ -114,7 +114,7 @@ namespace UserIdentityCore.Data
 
             if (await userManager.FindByNameAsync("mm@mm.com") == null)
             {
-                var user = new REmployee.Models.ApplicationUser
+                var user = new ApplicationUser
                 {
                     UserName = "mm@mm.com",
                     Email = "mm@mm.com",
@@ -149,7 +149,7 @@ namespace UserIdentityCore.Data
 
             if (await userManager.FindByNameAsync("dd@dd.com") == null)
             {
-                var user = new REmployee.Models.ApplicationUser
+                var user = new ApplicationUser
                 {
 
                     UserName = "dd@dd.com",
