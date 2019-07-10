@@ -52,12 +52,12 @@ namespace REmployee.Areas.Identity.Pages.Account
             [Display(Name = "Surname")]
             public string SurName { get; set; }
 
-            [Required]
-            [DataType(DataType.Text)]
-            [MaxLength(10)]
-            [DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}", ApplyFormatInEditMode = true)]
-            [Display(Name = "Date of Birth")]
-            public DateTime DateOfBirth { get; set; }
+            //[Required]
+            //[DataType(DataType.Text)]
+            //[MaxLength(10)]
+            //[DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}", ApplyFormatInEditMode = true)]
+            //[Display(Name = "Date of Birth")]
+            //public DateTime DateOfBirth { get; set; }
 
             [Required]
             [DataType(DataType.Text)]
@@ -98,7 +98,7 @@ namespace REmployee.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     Surname = Input.SurName,
-                  //  DateOfBirth = Input.DateOfBirth,
+                    //DateOfBirth = Input.DateOfBirth,
                     ContactNumber = Input.ContactNumber
                 };
 

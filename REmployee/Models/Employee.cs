@@ -45,5 +45,8 @@ namespace REmployee.Models
         [Display(Name = "Employee Status")]
         public int EmployeeStatusId { get; set; }
         public EmployeeStatus EmployeeStatus { get; set; }
+
+        public int ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

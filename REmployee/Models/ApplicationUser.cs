@@ -14,10 +14,10 @@ namespace REmployee.Models
 
         public string FirstName { get; set; }
         public string Surname { get; set; }
-        public string DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string EmailAddress { get; set; }
         public string ContactNumber { get; set; }
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        //public int EmployeeId { get; set; }
+        //public Employee Employee { get; set; }
     }
 }

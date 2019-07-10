@@ -14,7 +14,7 @@ using REmployee.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using REmployee.Models;
-using UserIdentityCore.Data;
+//using UserIdentityCore.Data;
 using REmployee.Areas;
 
 namespace REmployee
@@ -98,7 +98,7 @@ namespace REmployee
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-           DummyData.Initialize(context, userManager, roleManager).Wait();
+          // DummyData.Initialize(context, userManager, roleManager).Wait();
         }
     }
 }
